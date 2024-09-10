@@ -1,5 +1,6 @@
 import { BookItem } from "../BookItem/BookItem";
 import FormValues from "../../types/FormValues";
+import styles from "./BookList.module.css";
 
 type Props = {
   books: FormValues[];
@@ -8,14 +9,13 @@ type Props = {
 export const BookList = ({ books }: Props) => {
   return (
     <>
-      {books.map((book) => (
-        <BookItem
-          key={book.id}
-          title={book.title}
-          author={book.author}
-          pages={book.pages}
-        />
-      ))}
+      <ul className={styles.BookList}>
+        {books.map((book) => (
+          <li key={book.title}>
+            <BookItem key={book.id} title={book.title} author={book.author} />
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
