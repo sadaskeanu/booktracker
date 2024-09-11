@@ -39,6 +39,19 @@ app.post("/submit", (req, res) => {
   }
 });
 
+app.delete("/books/:id", (req, res) => {
+  const { id } = req.params;
+
+  const bookIndex = books.findIndex((book) => book.id === parseInt(id, 10));
+
+  if (bookIndex !== -1) {
+    books.splice(bookIndex, 1);
+    res.status(200).json({ message: "Book deleted successfully" });
+  } else {
+    res.status(404).json({ error: "Book not found" });
+  }
+});
+
 app.get("/books", (req, res) => {
   res.status(200).json(books);
 });

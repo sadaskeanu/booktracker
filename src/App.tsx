@@ -42,12 +42,6 @@ function App() {
 
     const pagesAsNumber = formValues.pages ? Number(formValues.pages) : 0;
 
-    console.log("Form values before submission:", {
-      title: formValues.title,
-      author: formValues.author,
-      pages: pagesAsNumber,
-    });
-
     if (formValues.title && formValues.author && pagesAsNumber) {
       try {
         const response = await fetch("http://localhost:3000/submit", {
@@ -64,29 +58,42 @@ function App() {
 
         const data = await response.json();
 
-        console.log("Response from server:", data);
-
         if (response.ok) {
           setBooks((prevBooks) => [
             ...prevBooks,
             {
-              ...formValues,
+              id: data.book.id,
+              title: formValues.title,
+              author: formValues.author,
+              pages: String(pagesAsNumber),
             },
           ]);
 
           setFormValues({ id: "", title: "", author: "", pages: "" });
+          console.log(data.message);
         } else {
-          console.error("Server error:", data.error || "Something went wrong!");
+          console.error("Failed to add the book.");
         }
       } catch (error) {
         console.error("Failed to submit the form:", error);
       }
-    } else {
-      console.error("Form validation failed:", {
-        title: formValues.title,
-        author: formValues.author,
-        pages: pagesAsNumber,
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:3000/books/${id}`, {
+        method: "DELETE",
       });
+
+      if (response.ok) {
+        setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
+        console.log(`Book with id ${id} deleted`);
+      } else {
+        console.error("Failed to delete the book.");
+      }
+    } catch (error) {
+      console.error("Failed to delete the book:", error);
     }
   };
 
@@ -105,7 +112,7 @@ function App() {
         onSubmit={handleSubmit}
         value={formValues}
       />
-      <BookList books={books} />
+      <BookList books={books} onDelete={handleDelete} />
       <TotalPages pages={totalPages} />
     </>
   );
