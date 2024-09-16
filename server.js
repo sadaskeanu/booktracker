@@ -39,6 +39,28 @@ app.post("/submit", (req, res) => {
   }
 });
 
+app.put("/books/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, author, pages } = req.body;
+
+  const bookIndex = books.findIndex((book) => book.id === parseInt(id, 10));
+
+  if (bookIndex !== -1) {
+    books[bookIndex] = {
+      ...books[bookIndex],
+      title: title !== undefined ? title : books[bookIndex].title,
+      author: author !== undefined ? author : books[bookIndex].author,
+      pages: pages !== undefined ? Number(pages) : books[bookIndex].pages,
+    };
+
+    res
+      .status(200)
+      .json({ message: "Book updated successfully", book: books[bookIndex] });
+  } else {
+    res.status(404).json({ error: "Book not found" });
+  }
+});
+
 app.delete("/books/:id", (req, res) => {
   const { id } = req.params;
 

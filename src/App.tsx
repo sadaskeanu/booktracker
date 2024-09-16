@@ -20,8 +20,14 @@ function App() {
       try {
         const response = await fetch("http://localhost:3000/books");
         const data = await response.json();
-        setBooks(data);
-        console.log(data);
+        setBooks(
+          data.map((book: any) => ({
+            id: String(book.id),
+            title: book.title,
+            author: book.author,
+            pages: String(book.pages),
+          }))
+        );
       } catch (error) {
         console.error("Failed to fetch books:", error);
       }
@@ -62,10 +68,10 @@ function App() {
           setBooks((prevBooks) => [
             ...prevBooks,
             {
-              id: data.book.id,
-              title: formValues.title,
-              author: formValues.author,
-              pages: String(pagesAsNumber),
+              id: String(data.book.id),
+              title: data.book.title,
+              author: data.book.author,
+              pages: String(data.book.pages),
             },
           ]);
 
@@ -97,6 +103,40 @@ function App() {
     }
   };
 
+  const handleEdit = async (updatedBook: FormValues) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/books/${updatedBook.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: updatedBook.title,
+            author: updatedBook.author,
+            pages: Number(updatedBook.pages),
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setBooks((prevBooks) =>
+          prevBooks.map((book) =>
+            book.id === updatedBook.id ? updatedBook : book
+          )
+        );
+        console.log(data.message);
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to update the book:", errorData.error);
+      }
+    } catch (error) {
+      console.error("Failed to update the book:", error);
+    }
+  };
+
   const totalPages = books.reduce(
     (total, book) => total + (Number(book.pages) || 0),
     0
@@ -112,7 +152,7 @@ function App() {
         onSubmit={handleSubmit}
         value={formValues}
       />
-      <BookList books={books} onDelete={handleDelete} />
+      <BookList books={books} onDelete={handleDelete} onEdit={handleEdit} />
       <TotalPages pages={totalPages} />
     </>
   );
