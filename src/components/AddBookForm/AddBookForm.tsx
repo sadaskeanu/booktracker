@@ -1,6 +1,7 @@
 import { Input } from "../_common/Input/Input";
 import { FormEvent, ChangeEvent } from "react";
 import FormValues from "../../types/FormValues";
+import styles from "./AddBookForm.module.css";
 
 type Props = {
   onChange: (value: string, field: keyof FormValues) => void;
@@ -19,22 +20,26 @@ export const AddBookForm = ({ onChange, onSubmit, value }: Props) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <Input
-          onChange={(e) => handleInputChange(e, "title")}
-          value={value.title}
-          placeholder="Book Title"
-        />
-        <Input
-          onChange={(e) => handleInputChange(e, "author")}
-          value={value.author}
-          placeholder="Author"
-        />
-        <Input
-          onChange={(e) => handleInputChange(e, "pages")}
-          value={value.pages}
-          placeholder="How many pages?"
-        />
-        <button type="submit">Add Book</button>
+        <div className={styles.form}>
+          <Input
+            onChange={(e) => handleInputChange(e, "title")}
+            value={value.title}
+            placeholder="Book Title"
+          />
+          <Input
+            onChange={(e) => handleInputChange(e, "author")}
+            value={value.author}
+            placeholder="Author"
+          />
+          <Input
+            onChange={(e) => handleInputChange(e, "pages")}
+            value={value.pages}
+            placeholder="How many pages?"
+          />
+        </div>
+        <button type="submit" className={styles.submit}>
+          Add Book
+        </button>
       </form>
     </>
   );

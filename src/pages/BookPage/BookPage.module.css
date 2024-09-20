@@ -1,0 +1,12 @@
+.background {
+  display: flex;
+  color: #212124;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+  min-height: 100vh;
+  background: #f8f8f8;
+  background-image: url("../../assets/concrete-wall.png");
+}

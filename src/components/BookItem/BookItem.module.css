@@ -1,5 +1,51 @@
-.bookItem {
+.tag {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffff;
+  cursor: default;
+}
+
+.variant1 {
+  background-color: #ee6a92;
+  border: 3px solid #9ec6aa;
+}
+
+.variant2 {
+  background-color: #9ec6aa;
+  border: 3px solid #ee6a92;
+}
+
+.title {
+  margin-right: 15px;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.tag.variant1 .deleteButton {
+  color: #9ec6aa;
+}
+
+.tag.variant1 .deleteButton:hover {
+  color: #c0cdc4;
+}
+
+.tag.variant2 .deleteButton {
+  color: #ee6a92;
+}
+
+.tag.variant2 .deleteButton:hover {
+  color: #e887a4;
 }

@@ -1,0 +1,15 @@
+.form {
+  margin: 30px;
+}
+
+.submit {
+  background-color: #f27303;
+  border: 3px solid;
+  border-color: #f5c9e8;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: #ffff;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.header {
+  line-height: 50px;
+  color: #f27303;
+  text-shadow: -2px -2px #f5c9e8, -2px -1.5px #f5c9e8, -2px -1px #f5c9e8,
+    -2px -0.5px #f5c9e8, -2px 0px #f5c9e8, -2px 0.5px #f5c9e8, -2px 1px #f5c9e8,
+    -2px 1.5px #f5c9e8, -2px 2px #f5c9e8, -1.5px 2px #f5c9e8, -1px 2px #f5c9e8,
+    -0.5px 2px #f5c9e8, 0px 2px #f5c9e8, 0.5px 2px #f5c9e8, 1px 2px #f5c9e8,
+    1.5px 2px #f5c9e8, 2px 2px #f5c9e8, 2px 1.5px #f5c9e8, 2px 1px #f5c9e8,
+    2px 0.5px #f5c9e8, 2px 0px #f5c9e8, 2px -0.5px #f5c9e8, 2px -1px #f5c9e8,
+    2px -1.5px #f5c9e8, 2px -2px #f5c9e8, 1.5px -2px #f5c9e8, 1px -2px #f5c9e8,
+    0.5px -2px #f5c9e8, 0px -2px #f5c9e8, -0.5px -2px #f5c9e8, -1px -2px #f5c9e8,
+    -1.5px -2px #f5c9e8;
+}

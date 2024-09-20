@@ -1,0 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  width: 100hv;
+}
+
+.grid > div {
+  height: 100%;
+}
+
+.leftSide {
+  padding: 20px;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  overflow: auto;
+  max-width: 700px;
+}
+
+.rightSide {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
